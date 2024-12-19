@@ -91,7 +91,48 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p>通过 Hexo 建立个人博客及多台电脑维护的完整流程总结：<br>一、搭建 Hexo 博客</p>
+<ol>
+<li>环境准备<br>安装 Node.js 和 npm（Node.js 自带）。<br>安装 Git：用于版本控制和部署。</li>
+<li>初始化 Hexo<br>bash<br>复制代码<br>npm install -g hexo-cli   # 安装 Hexo CLI<br>hexo init myblog          # 初始化博客项目<br>cd myblog<br>npm install               # 安装依赖</li>
+<li>生成博客<br>运行以下命令，预览博客：</li>
+</ol>
+<p>bash<br>复制代码<br>hexo generate       # 生成静态文件<br>hexo server         # 启动本地服务器，访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a><br>二、部署到 GitHub Pages</p>
+<ol>
+<li>创建 GitHub 仓库<br>创建一个名为 yourusername.github.io 的仓库，用于部署博客。<br>（可选）再创建一个仓库如 myblog，用于存储 Hexo 源文件。</li>
+<li>安装部署插件<br>在 Hexo 项目目录下安装 hexo-deployer-git 插件：</li>
+</ol>
+<p>bash<br>复制代码<br>npm install hexo-deployer-git –save<br>3. 配置 _config.yml<br>在项目根目录的 _config.yml 文件中，找到 deploy 部分，配置如下：</p>
+<p>yaml<br>复制代码<br>deploy:<br>  type: git<br>  repo: <a target="_blank" rel="noopener" href="https://github.com/yourusername/yourusername.github.io.git">https://github.com/yourusername/yourusername.github.io.git</a><br>  branch: main  # 或者 master，根据你的仓库设置<br>4. 部署博客<br>运行以下命令：</p>
+<p>bash<br>复制代码<br>hexo clean        # 清理旧文件<br>hexo generate     # 生成静态文件<br>hexo deploy       # 部署到 GitHub Pages<br>你的博客将可通过 <a target="_blank" rel="noopener" href="https://yourusername.github.io/">https://yourusername.github.io</a> 访问。</p>
+<p>三、更新博客文章</p>
+<ol>
+<li>创建新文章<br>运行以下命令：</li>
+</ol>
+<p>bash<br>复制代码<br>hexo new “My New Post”<br>这将在 source&#x2F;_posts&#x2F; 目录下生成一个 Markdown 文件。</p>
+<ol start="2">
+<li>编辑文章<br>打开生成的 Markdown 文件，编写内容，并支持图文混排。常用语法：</li>
+</ol>
+<p>markdown<br>复制代码</p>
+<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><h2 id="副标题"><a href="#副标题" class="headerlink" title="副标题"></a>副标题</h2><p><strong>加粗文字</strong><br><em>斜体文字</em><br><code>代码块</code></p>
+<p><img src="/%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84" alt="图片描述"></p>
+<p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接描述</a><br>3. 更新博客<br>每次更新文章后，执行以下命令：</p>
+<p>bash<br>复制代码<br>hexo clean<br>hexo generate<br>hexo deploy<br>四、多台电脑维护 Hexo 博客</p>
+<ol>
+<li>将 Hexo 项目存储在 Git 仓库<br>创建一个新仓库（如 myblog）用于存储 Hexo 项目：</li>
+</ol>
+<p>bash<br>复制代码<br>git init<br>git remote add origin <a target="_blank" rel="noopener" href="https://github.com/yourusername/myblog.git">https://github.com/yourusername/myblog.git</a><br>git add .<br>git commit -m “Initial commit”<br>git branch -M main<br>git push -u origin main<br>在 .gitignore 文件中，确保忽略以下内容：</p>
+<p>plaintext<br>复制代码<br>node_modules&#x2F;<br>public&#x2F;<br>.deploy_git&#x2F;<br>db.json<br>2. 在另一台电脑克隆项目<br>在新电脑上，克隆 Hexo 项目并安装依赖：</p>
+<p>bash<br>复制代码<br>git clone <a target="_blank" rel="noopener" href="https://github.com/yourusername/myblog.git">https://github.com/yourusername/myblog.git</a><br>cd myblog<br>npm install<br>3. 同步更新<br>在任何一台电脑上更新 Hexo 博客时：</p>
+<p>将本地更改推送到 Hexo 项目仓库：</p>
+<p>bash<br>复制代码<br>git add .<br>git commit -m “Update post”<br>git push<br>在另一台电脑上，拉取最新代码：</p>
+<p>bash<br>复制代码<br>git pull<br>部署博客到 GitHub Pages：</p>
+<p>bash<br>复制代码<br>hexo clean<br>hexo generate<br>hexo deploy<br>五、优化建议<br>图片管理：</p>
+<p>使用 Hexo 插件 hexo-asset-image，将图片与文章文件绑定管理。<br>或者上传图片到图床（如 GitHub 图床、阿里云 OSS）。<br>主题美化：</p>
+<p>替换 Hexo 默认主题，推荐 NexT 或其他 Hexo 主题。<br>按需修改主题的 _config.yml 文件，调整外观和功能。<br>搜索功能：</p>
+<p>安装 hexo-generator-searchdb，添加站内搜索支持。<br>备份：</p>
+<p>Hexo 源文件和博客部署分别存在两个仓库，确保代码和网站安全。</p>
+
       
     </div>
     <footer class="article-footer">
